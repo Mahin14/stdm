@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{%block body%}
+<div class="container">
+  {%for teacher_list in teachers %}
+<div class="card">
+    <div class="card-header">
+     position: {{teacher_list.positon}}
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+          <div class="container">
+              <div class="row">
+                  <div class="col-6">
+          <img src="media/{{teacher_list.teacherimage}}" width="100px"height="100px" alt="">
+
+                  </div>
+                  <div class="col-6">
+                    <p>{{teacher_list.first_name}} {{teacher_list.last_name}} </p>
+
+                 
+                    <p>Date of birth: {{teacher_list.birthDate}} </p>
+                    <p><address>address:{{teacher_list.address}}</address></p>
+                    <p>mobile No: {{teacher_list.phoneNumber}}</p>
+                  </div>
+              </div>
+          </div>
+
+        <footer class="blockquote-footer"><a href="{%url 'adminsite:teacher_delete' id=teacher_list.id%}">Delete</a>  | <a href="{% url 'adminsite:update_teacher' id=teacher_list.id%}">update</a> <cite title="Source Title"></cite></footer>
+      </blockquote>
+    </div>
+  </div>
+  
+
+
+
+
+
+{% endfor %}
+
+</div>
+{%endblock body%}

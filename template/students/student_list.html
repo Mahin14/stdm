@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{%block body%}
+<div class="container">
+  {%for student_list in students %}
+<div class="card">
+    <div class="card-header">
+     class: {{student_list.className}}
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+          <div class="container">
+              <div class="row">
+                  <div class="col-6">
+          <img src="media/{{student_list.studentimage}}" width="100px"height="100px" alt="">
+
+                  </div>
+                  <div class="col-6">
+                    <p>{{student_list.first_name}} {{student_list.last_name}} </p>
+                    <p>roll: {{student_list.roll}}</p>
+                    <p>registration no: {{student_list.registration_no}}</p>
+                    <p>Date of birth: {{student_list.birthDate}} </p>
+                    <p><address>address:{{student_list.address}}</address></p>
+                    <p>mobile No: {{student_list.phoneNumber}}</p>
+                  </div>
+              </div>
+          </div>
+
+        <footer class="blockquote-footer"><a href="{%url 'adminsite:student_delete' id=student_list.id %}">Delete</a>  | <a href="{%url 'adminsite:student_update' id=student_list.id%}">update</a> <cite title="Source Title"></cite></footer>
+      </blockquote>
+    </div>
+  </div>
+  
+
+
+
+
+
+{% endfor %}
+
+</div>
+{%endblock body%}

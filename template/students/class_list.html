@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{%block body%}
+<div class="container">
+    <div class="row">
+
+  
+{%for class in className %}
+
+<div class="col">
+    <p>class: <br> <b> <a href="{% url 'adminsite:student_serial' classid=class.id%}">{{class.class_name}}</a></b>
+        <a href="{%url 'adminsite:class_delete' id=class.id %}">Delete</a>  | <a href="{%url 'adminsite:class_update' id=class.id%}">update</a></p>
+</div>
+ 
+
+{% endfor %}
+</div>
+</div>
+{%endblock body%}
