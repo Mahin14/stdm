@@ -7,8 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" >
-
-    <title>Hello, world!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <title>student management</title>
   </head>
   <style>
       .navbar-fixed-left{
@@ -75,6 +75,10 @@
       .closebtn:hover {
         color: black;
       }
+      i{
+        font-size:30px;
+        color: white;
+      }
       
   </style>
   <body>
@@ -85,7 +89,9 @@
 
           <p>User Name:<a class="navbar-brand" href="#"> </a></p>
           <p>Email:</p>
-       
+          <center>
+          <i class="fas fa-sign-out-alt"><a href="{% url 'adminsite:logout'%}">logout</a></i>
+        </center>
         </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -95,19 +101,19 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{%url 'adminsite:dashboard' %}">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'adminsite:student_creation'  %}">create students</a>
+              <li class="nav-item dropdown bg-dark">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Create
+                </a>
+                <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdownMenuLink">
+                 
+                  <li> <a class="dropdown-item" href="{% url 'adminsite:create_notice' %}">create Notice</a></li>
+                  <li> <a class="dropdown-item" href="{% url 'adminsite:student_creation'  %}">create students</a></li>                
+                   <li> <a class="dropdown-item" href="{% url 'adminsite:class_creation' %}">create class</a></li>               
+                    <li> <a class="dropdown-item" href="{% url 'adminsite:teacher_create' %}">create Teacher</a></li>                
+                   
+                </ul>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'adminsite:class_creation' %}">create class</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'adminsite:teacher_create' %}">create Teacher</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'adminsite:create_notice' %}">create Notice</a>
-              </li>
-              
               <li class="nav-item dropdown bg-dark">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   All data

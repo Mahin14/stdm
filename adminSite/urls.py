@@ -29,6 +29,11 @@ urlpatterns = [
     # notice url
     path('Create_notice',create_Notice,name='create_notice'),
 
+    #login page
+    path('user_login',user_login,name='user_login'),
+    path('login',login_page,name='login'),
+    path('logout',user_logout,name='logout')
+
 
 
     #     path('accounts/', include('django.contrib.auth.urls')),

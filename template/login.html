@@ -1,0 +1,108 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" >
+
+    <title>student management</title>
+  </head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    body {
+        font-family:'Poppins',sans-serif;
+        background-color:#00ac96;
+    }
+    .content {
+
+        margin:8%;
+        background-color: #fff;
+        padding:4rem 1rem 4rem 1rem;
+        box-shadow: 0 0 5px 5px rgba(0,0,0, .05);
+    }
+    .form-control{
+        display:block;
+        width:100%;
+        font-size:1rem;
+        font-weight:400;
+        line-height:1.5;
+        border-color: #00ac96 !important;
+        border-style:solid;
+        border-width:0 0 1px 0 i !important;
+        padding: 5px !important;
+        color:#495057;
+        height:auto;
+        border-radius:0;
+        background-color: #fff;
+        background-clip: padding-box;
+
+    }
+    .form-control:focus{
+        color:#495057;
+        background-color:#fff;
+        outline: 0;
+        box-shadow:none;
+    }
+    .btn-class{
+        border-color:#00ac9c;
+        color:#00ac96;
+    }
+    .btn-class:hover{
+        background-color: #00ac9c;
+    }
+
+    </style>
+  <body>
+      <div class="container my-5">
+          <div class="row content">
+
+
+            <div class="col-md-6 ">
+<img src="/media/loginpic.png" class="image-fluid" alt="student log design">
+            </div>
+              <div class="col-md-6">
+
+
+<form action="{% url 'adminsite:user_login' %}" method="POST">
+    {%if messages %}
+    <strong><p class="text-danger">{{messages}}</p></strong>
+    {%endif%}
+    <div class="md-3 my-3">
+    <center><h1>LOGIN</h1></center>
+        {%csrf_token%}
+    </div>
+    <div class="mb-3 py-3">
+
+      <input type="username" name="username" class="form-control" required placeholder="Username" id="exampleInputEmail1" aria-describedby="emailHelp">
+     
+    </div>
+    <div class="mb-3 py-3">
+      <input type="password" name="password" class="form-control" required placeholder="Password" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">remaber me</label>
+    </div>
+    <button type="submit" class="btn  btn-class">Login</button>
+  </form>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+</div>
+
+</div>
+</div>
+
+
+
+  </body>
+</html>

@@ -1,11 +1,15 @@
 
+from django.contrib.auth import authenticate,login,logout
+from django.http import HttpResponseRedirect,HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 from django.shortcuts import render,redirect
 
 from .models import *
 from .forms import *
 
-# Create your views here.
+@login_required
 def dashboard(request):
     # user=request.user
     student=students.objects.all()
@@ -21,7 +25,7 @@ def dashboard(request):
 
 
 
-
+@login_required
 def student_form(request, id=0):
     if request.method =="GET":
         if id==0:
@@ -44,7 +48,7 @@ def student_form(request, id=0):
 
     
 
-
+@login_required
 def teacher_form(request, id=0):
     if request.method =="GET":
         if id==0:
@@ -72,19 +76,19 @@ def teacher_form(request, id=0):
 
 
 
-
+@login_required
 def student_list(request):
     student_data=students.objects.all().order_by("-className")
     dict={'students':student_data}
     return render(request,'students/student_list.html',context=dict)
-
+@login_required
 def student_delete(request,id):
     student = students.objects.get(pk=id)
     student.delete()
     return redirect('adminsite:all_student')
 
 
-
+@login_required
 def create_class(request,id=0):
     if request.method =="GET":
         if id==0:
@@ -105,7 +109,7 @@ def create_class(request,id=0):
         if form.is_valid():
             form.save()
         return redirect('adminsite:all_class')
-
+@login_required
 def all_class(request):
     className=StudentClass.objects.all()
     dict={'className':className}
@@ -114,7 +118,7 @@ def all_class(request):
     return render(request, "students/class_list.html", context=dict)
     
 
-
+@login_required
 def class_student_serial(request,classid):
     class_data=students.objects.filter(className_id=classid)
     dict={'students':class_data}
@@ -122,18 +126,20 @@ def class_student_serial(request,classid):
     return render(request,"students/class_listSerial.html",context=dict)
 
 
-
+@login_required
 def teacher_list(request):
     teachers_data=teachers.objects.all().order_by("positon")
     dict={'teachers':teachers_data}
     return render(request,'teachers/teachers_list.html',context=dict)
 
+
+@login_required
 def teachers_delete(request,id):
     teacher = teachers.objects.get(pk=id)
     teacher.delete()
     return redirect('adminsite:teacher_list')
 
-    
+@login_required  
 def create_Notice(request):
     heading='create notice'
     form=CreteNotice()
@@ -148,4 +154,31 @@ def create_Notice(request):
     dict={'form':form,'heading':heading}
     return render(request,'teachers/teacher_form.html',context=dict)
 
+def login_page(request):
+    return render(request,'login.html',context={})
 
+
+def user_login(request):
+    # if request.method=='GET':
+    #     return render(request,'login.html')
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        
+        user=authenticate(username=username,password=password)
+        if user:
+            # if user.is_superuser:
+            if user.is_active:
+                login(request,user)
+                return redirect('adminsite:dashboard')
+        else:
+            messages="user does not exist"
+            return render(request,'login.html',{'messages':messages})
+
+    else:
+        return render(request,'login.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('adminsite:login')

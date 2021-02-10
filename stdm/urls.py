@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.contrib.staticfiles.urls import static,staticfiles_urlpatterns
+from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('adminSite.urls')),
+    path('stdm/',include('adminSite.urls')),
+    path('',home,name='home'),
+
     # path('accounts/', include('django.contrib.auth.urls')),
 
 ]
