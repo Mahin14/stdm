@@ -1,11 +1,52 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 {% load crispy_forms_tags %}
 
 {%block body%}
-<form action="" method="POST" enctype="multipart/form-data">
-    {%csrf_token%}
-    {{form|crispy}}
-    <button class="btn btn-primary my-3" type="submit">submit</button>
+   
+ 
+   
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+            <strong>Create</strong>
+            <small> class</small>
+        </div>
+        <div class="card-body card-block">
+<form action="" class="form-horizontal" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+                {%csrf_token%}
+                {{form|crispy}}
+            </div>
+
+            <!-- <div class="row form-group">
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="city" class=" form-control-label">City</label>
+                        <input type="text" id="city" placeholder="Enter your city" class="form-control">
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="postal-code" class=" form-control-label">Postal Code</label>
+                        <input type="text" id="postal-code" placeholder="Postal Code" class="form-control">
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fa fa-dot-circle-o"></i> Submit
+            </button>
+            <button type="reset" class="btn btn-danger btn-sm">
+                <i class="fa fa-ban"></i> Reset
+            </button>
 </form>
+
+        </div>
+    </div>
+</div>
 
 {%endblock body%}

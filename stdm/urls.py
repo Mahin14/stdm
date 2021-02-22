@@ -21,8 +21,8 @@ from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('stdm/',include('adminSite.urls')),
-    path('',home,name='home'),
-    path('home',home2,name='home'),
+    path('dashboard/',home,name='home'),
+    path('home/',home2,name='home'),
 
 
     # path('accounts/', include('django.contrib.auth.urls')),

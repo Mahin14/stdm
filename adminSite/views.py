@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-
+from django.db.models import Count
 from django.shortcuts import render,redirect
 
 from .models import *
@@ -12,14 +12,20 @@ from .forms import *
 @login_required
 def dashboard(request):
     # user=request.user
-    student=students.objects.all()
-    teacher=teachers.objects.all()
+    
+    pubs = students.objects.annotate(num_student=Count('id'))
+    student=pubs[0].num_student
+    print(student)
+    teacher_count = students.objects.annotate(num_teacher=Count('id'))
+    teacher=teacher_count[0].num_teacher
+    print(teacher)
     class_list=StudentClass.objects.all()
     # print(student['registration_no__count'])
     notice=school_notice.objects.all().order_by('update_date')
     # print(user)
     dict={'notice':notice,'student':student,'class_list':class_list,'teacher':teacher}
-    return render(request,'base.html',context=dict)
+    print(dict)
+    return render(request,'index.html',context=dict)
 
 
 
@@ -109,6 +115,8 @@ def create_class(request,id=0):
         if form.is_valid():
             form.save()
         return redirect('adminsite:all_class')
+
+        
 @login_required
 def all_class(request):
     className=StudentClass.objects.all()
