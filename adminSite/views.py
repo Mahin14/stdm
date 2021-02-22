@@ -12,7 +12,6 @@ from .forms import *
 @login_required
 def dashboard(request):
     # user=request.user
-    
     pubs = students.objects.annotate(num_student=Count('id'))
     student=pubs[0].num_student
     print(student)
@@ -25,7 +24,7 @@ def dashboard(request):
     # print(user)
     dict={'notice':notice,'student':student,'class_list':class_list,'teacher':teacher}
     print(dict)
-    return render(request,'index.html',context=dict)
+    return render(request,'dashboard.html',context=dict)
 
 
 
@@ -116,7 +115,7 @@ def create_class(request,id=0):
             form.save()
         return redirect('adminsite:all_class')
 
-        
+
 @login_required
 def all_class(request):
     className=StudentClass.objects.all()
@@ -160,7 +159,7 @@ def create_Notice(request):
             form_obj.save()
             return redirect('adminsite:dashboard')
     dict={'form':form,'heading':heading}
-    return render(request,'teachers/teacher_form.html',context=dict)
+    return render(request,'students/create_notice.html',context=dict)
 
 def login_page(request):
     return render(request,'login.html',context={})

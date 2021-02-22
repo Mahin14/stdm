@@ -10,9 +10,5 @@ def home(request):
         return render(request,'login.html')
 
 
-def home2(request):
-    if request.user.is_authenticated:
-        return render(request,'index.html')
-    else:
-        return render(request,'login.html') 
+
     
