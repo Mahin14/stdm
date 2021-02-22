@@ -1,13 +1,80 @@
-{% extends 'base.html' %}
+
+    
+
+{% extends 'index.html' %}
 {% load crispy_forms_tags %}
 
 {%block body%}
-<form  method="POST" enctype="multipart/form-data">
-    {%csrf_token%}
-    {{form|crispy}}
-    <!-- {{form2|crispy}} -->
+   
+ 
+   
 
-    <button class="btn btn-primary my-3" type="submit">submit</button>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <strong>Create</strong>
+            <small> class</small>
+        </div>
+        <div class="card-body card-block">
+<form action="" class="form-horizontal" method="POST" enctype="multipart/form-data">
+    {%csrf_token%}
+    <div class="row form-group">
+            <div class="form-group col-md-6">
+                {{form.first_name|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-6">
+                {{form.last_name|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-6">
+                {{form.roll|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-6">
+                {{form.registration_no|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-6">
+                {{form.birthDate|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-6">
+                {{form.address|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-6">
+                {{form.phoneNumber|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-6">
+                {{form.className|as_crispy_field}}
+            </div>
+            <div class="form-group col-md-6">
+                {{form.studentimage|as_crispy_field}}
+            </div>
+        </div>
+
+            <!-- <div class="row form-group">
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="city" class=" form-control-label">City</label>
+                        <input type="text" id="city" placeholder="Enter your city" class="form-control">
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="postal-code" class=" form-control-label">Postal Code</label>
+                        <input type="text" id="postal-code" placeholder="Postal Code" class="form-control">
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fa fa-dot-circle-o"></i> Submit
+            </button>
+            <button type="reset" class="btn btn-danger btn-sm">
+                <i class="fa fa-ban"></i> Reset
+            </button>
 </form>
+
+        </div>
+    </div>
+</div>
 
 {%endblock body%}
