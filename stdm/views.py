@@ -5,7 +5,10 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
     if request.user.is_authenticated:
-        return render(request,'base.html')
+        return render(request,'dashboard.html')
     else:
         return render(request,'login.html')
+
+
+
     
