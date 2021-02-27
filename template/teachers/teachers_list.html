@@ -1,43 +1,127 @@
-{% extends 'base.html' %}
-
-
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+  
 {%block body%}
-<div class="container">
-  {%for teacher_list in teachers %}
-<div class="card">
-    <div class="card-header">
-     position: {{teacher_list.positon}}
-    </div>
-    <div class="card-body">
-      <blockquote class="blockquote mb-0">
-          <div class="container">
-              <div class="row">
-                  <div class="col-6">
-          <img src="media/{{teacher_list.teacherimage}}" width="100px"height="100px" alt="">
+     
 
-                  </div>
-                  <div class="col-6">
-                    <p>{{teacher_list.first_name}} {{teacher_list.last_name}} </p>
-
-                 
-                    <p>Date of birth: {{teacher_list.birthDate}} </p>
-                    <p><address>address:{{teacher_list.address}}</address></p>
-                    <p>mobile No: {{teacher_list.phoneNumber}}</p>
-                  </div>
-              </div>
-          </div>
-
-        <footer class="blockquote-footer"><a href="{%url 'adminsite:teacher_delete' id=teacher_list.id%}">Delete</a>  | <a href="{% url 'adminsite:update_teacher' id=teacher_list.id%}">update</a> <cite title="Source Title"></cite></footer>
-      </blockquote>
-    </div>
-  </div>
   
 
+        <!-- DATA TABLE -->
+        <h3 class="title-5 m-b-35">Teacher list</h3>
+        <div class="table-data__tool">
+            <div class="table-data__tool-left">
+                <div class="rs-select2--light rs-select2--md">
+                    <select class="js-select2" name="property">
+                        <option selected="selected">All Properties</option>
+                        <option value="">Option 1</option>
+                        <option value="">Option 2</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+                <div class="rs-select2--light rs-select2--sm">
+                    <select class="js-select2" name="time">
+                        <option selected="selected">Today</option>
+                        <option value="">3 Days</option>
+                        <option value="">1 Week</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+                <button class="au-btn-filter">
+                    <i class="zmdi zmdi-filter-list"></i>filters</button>
+            </div>
+            <div class="table-data__tool-right">
+                <a href="{% url 'adminsite:teacher_create' %}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                    <i class="zmdi zmdi-plus"></i>Add Teacher</button></a>
+                <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                    <select class="js-select2" name="type">
+                        <option selected="selected">Export</option>
+                        <option value="">Option 1</option>
+                        <option value="">Option 2</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                    <tr>
+                        <th>
+                            <label class="au-checkbox">
+                                <input type="checkbox">
+                                <span class="au-checkmark"></span>
+                            </label>
+                        </th>
+                        <th>pic</th>
+                        <th>name</th>
+                        <th>email</th>
+                        <th>description</th>
+                        
+                        <th>status</th>
+                   
+                    </tr>
+                </thead>
+                <tbody>
+                  {%for teacher_list in teachers %}
+                    <tr class="tr-shadow">
+                        <td>
+                            <label class="au-checkbox">
+                                <input type="checkbox">
+                                <span class="au-checkmark"></span>
+                            </label>
+                        </td>
+                        <td><img src="/media/{{teacher_list.teacherimage}}" width="50px"height="100px" alt=""></td>
+                        <td>{{teacher_list.first_name}} {{teacher_list.last_name}}</td>
+                        <td>
+                            <span class="block-email">lori@example.com</span>
+                        </td>
+                        <td class="desc">{{teacher_list.address}}</td>
+                        <!-- <td>2018-09-27 02:12</td> -->
+                        <!-- <td>
+                            <span class="status--process">Processed</span>
+                        </td> -->
+                        <td>{{teacher_list.positon}}</td>
+                        <td>
+                            <div class="table-data-feature">
+                                <a href="{%url 'adminsite:update_teacher' id=teacher_list.id%}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <i class="zmdi zmdi-edit"></i>
+                                </button></a>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                  <a href="{% url 'adminsite:teacher_delete' id=teacher_list.id%}"><i class="zmdi zmdi-delete"></i></a>
+                                </button>
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                    <i class="zmdi zmdi-more"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="spacer"></tr>
+               
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        <!-- END DATA TABLE -->
 
 
+<!-- 
+{{teacher_list.phoneNumber}}
+{{teacher_list.birthDate}} -->
 
-
-{% endfor %}
+  <div class="card-footer">
+    <button type="submit" class="btn btn-primary btn-sm">
+        <i class="fa fa-dot-circle-o"></i> Submit
+    </button>
+    <button type="reset" class="btn btn-danger btn-sm">
+        <i class="fa fa-ban"></i> Reset
+    </button>
+</form>
 
 </div>
-{%endblock body%}
+
+
+{%endblock body%}  
+
+
+

@@ -30,7 +30,7 @@ class students(models.Model):
     birthDate=models.DateField()
     address=models.TextField()
     phoneNumber=models.IntegerField()
-    className=models.ForeignKey(StudentClass,on_delete=models.CASCADE)
+    className=models.ForeignKey(StudentClass,on_delete=models.PROTECT)
     studentimage=models.ImageField(upload_to='student_pic')
 
     

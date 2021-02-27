@@ -86,11 +86,14 @@ def student_list(request):
     student_data=students.objects.all().order_by("-className")
     dict={'students':student_data}
     return render(request,'students/student_list.html',context=dict)
+
+
+
 @login_required
 def student_delete(request,id):
-    student = students.objects.get(pk=id)
+    student = StudentClass.objects.get(pk=id)
     student.delete()
-    return redirect('adminsite:all_student')
+    return redirect('adminsite:all_class')
 
 
 @login_required

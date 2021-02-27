@@ -1,20 +1,35 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 
-
+{% block style %}
+<style>
+    a{
+        color:white;
+    }
+</style>
+{% endblock  %}
 {%block body%}
-<div class="container">
-    <div class="row">
-
-  
-{%for class in className %}
-
-<div class="col">
-    <p>class: <br> <b> <a href="{% url 'adminsite:student_serial' classid=class.id%}">{{class.class_name}}</a></b>
-        <a href="{%url 'adminsite:class_delete' id=class.id %}">Delete</a>  | <a href="{%url 'adminsite:class_update' id=class.id%}">update</a></p>
+<div class="row m-5">
+    <div class="col-lg-6">
+<a href="{% url 'adminsite:class_creation' %}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+    <i class="zmdi zmdi-plus"></i>Add class</button></a>
 </div>
- 
-
-{% endfor %}
 </div>
+<div class="col-lg-6">
+    <div class="au-card au-card--bg-blue au-card-top-countries m-b-30">
+        <div class="au-card-inner">
+            <div class="table-responsive">
+                <table class="table table-top-countries">
+                    <tbody>
+                        {%for class in className %}
+                        <tr>
+                            <td><a href="{% url 'adminsite:student_serial' classid=class.id%}">{{class.class_name}}</a></td>
+                            <td class="text-right"><a href="{%url 'adminsite:class_delete' id=class.id %}">Delete</a>  | <a href="{%url 'adminsite:class_update' id=class.id%}">update</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 {%endblock body%}
