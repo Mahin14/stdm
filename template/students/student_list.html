@@ -11,6 +11,9 @@
         <!-- DATA TABLE -->
         <h3 class="title-5 m-b-35">student list</h3>
         <div class="table-data__tool">
+            
+            <form action="" method="POST" >
+                {%csrf_token%}
             <div class="table-data__tool-left">
                 <div class="rs-select2--light rs-select2--md">
                     <select class="js-select2" name="property">
@@ -20,17 +23,23 @@
                     </select>
                     <div class="dropDownSelect2"></div>
                 </div>
-                <div class="rs-select2--light rs-select2--sm">
+                <!-- <div class="rs-select2--light rs-select2--sm">
                     <select class="js-select2" name="time">
                         <option selected="selected">Today</option>
                         <option value="">3 Days</option>
                         <option value="">1 Week</option>
                     </select>
                     <div class="dropDownSelect2"></div>
-                </div>
-                <button class="au-btn-filter">
-                    <i class="zmdi zmdi-filter-list"></i>filters</button>
+                </div> -->
+
+                        <input type="text" class="form-control" name="registration_no" placeholder="registration_no" aria-label="" aria-describedby="basic-addon1">
+                        <button class="au-btn-filter" type="submit">
+                            <i class="zmdi zmdi-filter-list"></i>filters</button>
+                  
             </div>
+          </form>
+      
+     
             <div class="table-data__tool-right">
                 <a href="{% url 'adminsite:student_creation'  %}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add Student</button></a>
@@ -44,6 +53,7 @@
                 </div>
             </div>
         </div>
+   
         <div class="table-responsive table-responsive-data2">
             <table class="table table-data2">
                 <thead>

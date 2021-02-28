@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     # other app
     'crispy_forms',
+    'django_filters',
 
 
 ]

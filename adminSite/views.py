@@ -8,6 +8,7 @@ from django.shortcuts import render,redirect
 
 from .models import *
 from .forms import *
+from .filter import *
 
 @login_required
 def dashboard(request):
@@ -83,7 +84,10 @@ def teacher_form(request, id=0):
 
 @login_required
 def student_list(request):
-    student_data=students.objects.all().order_by("-className")
+    student_data=students.objects.all()
+    register_no=request.POST.get('registration_no')
+    if register_no !="" and register_no is not None:
+        student_data=student_data.filter(registration_no__icontains=register_no)
     dict={'students':student_data}
     return render(request,'students/student_list.html',context=dict)
 
