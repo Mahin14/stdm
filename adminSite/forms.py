@@ -9,18 +9,7 @@ class studentclasscreate(forms.ModelForm):
         label={
             'class_name':'Class Name',        }
 
-class studentcreateform(forms.ModelForm):
-    # birthDate=forms.DateTimeField(widget = forms.SelectDateWidget)
-    birthDate=forms.DateField(widget=forms.TextInput(attrs={'type':'date'}))
-    class Meta:
-        model=students
-        fields='__all__'
-        label={
-            'first_name':'First Name',
-            'last_name':'Last Name',
-            'birthDate':'Date of Birth',
-            'phoneNumber':'Mobile Phone no',
-            'className':'Which class study now'   ,     }
+
 
 
 class teacherCreationform(forms.ModelForm):

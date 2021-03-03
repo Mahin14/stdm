@@ -22,21 +22,8 @@ class StudentClass(models.Model):
     def __str__(self):
         return self.class_name
 
-class students(models.Model):
-    first_name=models.CharField(max_length=100)
-    last_name=models.CharField(max_length=100)
-    roll=models.IntegerField()
-    registration_no=models.CharField(default=random_num(),max_length=100)
-    birthDate=models.DateField()
-    address=models.TextField()
-    phoneNumber=models.IntegerField()
-    className=models.ForeignKey(StudentClass,on_delete=models.PROTECT)
-    studentimage=models.ImageField(upload_to='student_pic')
 
-    
 
-    def __str__(self) :
-        return self.first_name +" " +self.last_name
 
     
 
