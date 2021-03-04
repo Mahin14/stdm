@@ -13,11 +13,11 @@ from .filter import *
 @login_required
 def dashboard(request):
     # user=request.user
-    pubs = students.objects.annotate(num_student=Count('id'))
-    student=pubs[0].num_student
+    student = students.objects.all().count()
+    
     print(student)
-    teacher_count = students.objects.annotate(num_teacher=Count('id'))
-    teacher=teacher_count[0].num_teacher
+    teacher = students.objects.all().count()
+    
     print(teacher)
     class_list=StudentClass.objects.all()
     # print(student['registration_no__count'])
@@ -196,3 +196,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('adminsite:login')
+
+@login_required
+def studentDetails(request):
+    return render(request,'studetns/studentDetails.html')
