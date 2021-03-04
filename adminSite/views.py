@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Count
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 
 from .models import *
 from .forms import *
@@ -198,5 +198,8 @@ def user_logout(request):
     return redirect('adminsite:login')
 
 @login_required
-def studentDetails(request):
-    return render(request,'studetns/studentDetails.html')
+def studentDetails(request,id):
+    student_data=get_object_or_404(students,pk=id)
+    dict={'student':student_data}
+
+    return render(request,'students/studentDetails.html',context=dict)

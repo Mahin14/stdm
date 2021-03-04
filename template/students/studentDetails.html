@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <img src="" alt="">
+        <img src="/media/{{student.studentimage}}" width="100px" height="150px" alt="">
     </div>
     <div class="col-md-8">
         <h1>School Name</h1>
@@ -13,26 +13,55 @@
         <h3>school Details</h3>
     </div>
     <div class="col-md-12">
-        <thead>
-            <tr>
-                <th>  Title </th>
-                <th> Details </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>Name:</th>
-                <th>Mahin</th>
-            </tr>
-        </tbody>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                
+                <th scope="col">Title</th>
+                <th scope="col">Details</th>
+            
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-primary">
+                <th scope="row">First Name:</th>
+                <td>{{student.first_name}}</td>
+              </tr>
+              <tr class="table-primary">
+                <th scope="row">Last name:</th>
+                <td>{{student.last_name}}</td>
+              </tr>
+              <tr class="table-primary">
+                <th scope="row">Last name:</th>
+                <td>{{student.last_name}}</td>
+              </tr>
+              <tr class="table-primary">
+                <th scope="row">roll:</th>
+                <td>{{student.roll}}</td>
+              </tr>
+              <tr class="table-primary">
+                <th scope="row">registration_no:</th>
+                <td>{{student.registration_no}}</td>
+              </tr>
+              <tr class="table-primary">
+                <th scope="row">BirthDate:</th>
+                <td>{{student.birthDate}}</td>
+              </tr>
+              <tr class="table-primary">
+                <th scope="row">Address</th>
+                <td>{{student.address}}</td>
+              </tr>
+              <tr class="table-primary">
+                <th scope="row">Phone No:</th>
+                <td>{{student.phoneNumber}}</td>
+              </tr>              
+              <tr class="table-primary">
+                <th scope="row">Class Nmae:</th>
+                <td>{{student.className}}</td>
+              </tr>
 
-        <tfoot>
-            <tr>
-                <th>  Title </th>
-                <th> Details </th>
-            </tr>
-        </tfoot>
-    </table>
+            </tbody>
+          </table>
     </div>
 </div>
 
