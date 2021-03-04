@@ -197,6 +197,7 @@ def user_logout(request):
     logout(request)
     return redirect('adminsite:login')
 
+
 @login_required
 def studentDetails(request,id):
     student_data=get_object_or_404(students,pk=id)
