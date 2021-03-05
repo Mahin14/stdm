@@ -32,9 +32,11 @@ urlpatterns = [
     #login page
     path('user_login',user_login,name='user_login'),
     path('login',login_page,name='login'),
-    path('logout',user_logout,name='logout')
+    path('logout',user_logout,name='logout'),
 
-
+    
+    #studetn motice_details
+    path('studetnDetails/<slug:id>',studentDetails,name='studentDetails')
 
     #     path('accounts/', include('django.contrib.auth.urls')),
     # path('accounts/signup/', classroom.SignUpView.as_view(), name='signup'),

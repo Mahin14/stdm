@@ -96,15 +96,15 @@
                         <td>{{teacher_list.positon}}</td>
                         <td>
                             <div class="table-data-feature">
-                                <a href="{%url 'adminsite:student_update' id=student_list.id%}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <a href="{%url 'adminsite:student_update' id=student_list.id%}"> <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button></a>
                                 <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                   <a href="{% url 'adminsite:student_delete' id=student_list.id %}"><i class="zmdi zmdi-delete"></i></a>
                                 </button>
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                <a href="{% url 'adminsite:studentDetails' id=student_list.id %}"><button class="item" data-toggle="tooltip" data-placement="top" title="More">
                                     <i class="zmdi zmdi-more"></i>
-                                </button>
+                                </button></a>
                             </div>
                         </td>
                     </tr>
