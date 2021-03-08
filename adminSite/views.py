@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, render,redirect
-
+from student.models import students,GuardianInfo,PreviousAcademicInfo
+from student.forms import studentcreateform,gardianInfoForm,PreviousAcademicInfoForm
 from .models import *
 from .forms import *
 from .filter import *
@@ -32,23 +33,51 @@ def dashboard(request):
 
 
 @login_required
-def student_form(request, id=0):
+def student_form(request, registration_no=0):
+
     if request.method =="GET":
         if id==0:
             form=studentcreateform()
+            form2=gardianInfoForm()
+            form3=PreviousAcademicInfoForm()
+            
         else:
-            stm=students.objects.get(pk=id)
+            stm=students.objects.get(registration_no=registration_no)
+            gtm=GuardianInfo.objects.get(registration_no=registration_no)
+            ptm=PreviousAcademicInfo.objects.get(registration_no=registration_no)
             form=studentcreateform(instance=stm)
-        dict={'form':form}
+            form2=gardianInfoForm(instance=gtm)
+            form3=PreviousAcademicInfoForm(instance=ptm)
+
+        dict={'form':form,'form2':form2,'form3':form3}
         return render(request,'students/student_form.html',context=dict)
     else:
         if id==0:
             form=studentcreateform(request.POST,request.FILES)
+            form=studentcreateform(request.POST,request.FILES)
+            form2=gardianInfoForm(request.POST,request.FILES)
+            form3=PreviousAcademicInfoForm(request.POST,request.FILES)
         else:
-            stm=students.objects.get(pk=id)
+            stm=students.objects.get(registration_no=registration_no)
+            gtm=GuardianInfo.objects.get(registration_no=registration_no)
+            ptm=PreviousAcademicInfo.objects.get(registration_no=registration_no)
             form=studentcreateform(instance=stm)
-        if form.is_valid():
-            form.save()
+            form2=gardianInfoForm(instance=gtm)
+            form3=PreviousAcademicInfoForm(instance=ptm)
+        if form.is_valid() and form2.is_valid() and form3.is_valid():
+            reg_no=form.cleaned_data.get('registration_no')
+            obj_form2=form2.save(commit=False)
+            obj_form3=form3.save(commit=False)
+            obj_form=form.save(commit=False)
+            print(reg_no)
+            obj_form2.registration_no=reg_no
+            obj_form3.registration_no=reg_no
+            obj_form.save()
+            obj_form2.save()
+            obj_form3.save()
+
+
+            
         return redirect('adminsite:all_student')
 
 
@@ -94,8 +123,8 @@ def student_list(request):
 
 
 @login_required
-def student_delete(request,id):
-    student = StudentClass.objects.get(pk=id)
+def student_delete(request,registration_no):
+    student = StudentClass.objects.get(registration_no=registration_no)
     student.delete()
     return redirect('adminsite:all_class')
 
@@ -199,8 +228,8 @@ def user_logout(request):
 
 
 @login_required
-def studentDetails(request,id):
-    student_data=get_object_or_404(students,pk=id)
+def studentDetails(request,registration_no):
+    student_data=get_object_or_404(students,registration_no=registration_no)
     dict={'student':student_data}
 
     return render(request,'students/studentDetails.html',context=dict)

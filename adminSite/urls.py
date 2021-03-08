@@ -9,8 +9,8 @@ app_name='adminsite'
 urlpatterns = [
     path('',dashboard,name='dashboard'),
     path('createstudent',student_form,name='student_creation'),
-    path('updatestudent/<int:id>',student_form,name='student_update'),
-    path('deleteStudent/<int:id>',student_delete,name='student_delete'),
+    path('updatestudent/<int:registration_no>',student_form,name='student_update'),
+    path('deleteStudent/<int:registration_no>',student_delete,name='student_delete'),
     path('studentlist',student_list,name='all_student'),
     
     # class url
@@ -36,7 +36,7 @@ urlpatterns = [
 
     
     #studetn motice_details
-    path('studetnDetails/<slug:id>',studentDetails,name='studentDetails')
+    path('studetnDetails/<slug:registration_no>',studentDetails,name='studentDetails')
 
     #     path('accounts/', include('django.contrib.auth.urls')),
     # path('accounts/signup/', classroom.SignUpView.as_view(), name='signup'),

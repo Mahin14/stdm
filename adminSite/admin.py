@@ -4,12 +4,12 @@ from django.contrib.auth.admin import UserAdmin
 from .models import *
 from.forms import *
 # Register your models here.
-@admin.register(teachers)
-@admin.register(students)
-class studentAdmin(admin.ModelAdmin):
-    search_fields=["registration_no"]
-    list_filter=["className"]
-    list_display=["first_name"]
+# @admin.register(teachers)
+# @admin.register(students)
+# class studentAdmin(admin.ModelAdmin):
+#     search_fields=["registration_no"]
+#     list_filter=["className"]
+#     list_display=["first_name"]
     
 
 
@@ -24,8 +24,7 @@ class studentAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(StudentClass)
-admin.site.register(school_notice)
+
 
 
 

@@ -20,32 +20,15 @@
     {%csrf_token%}
     <div class="row form-group">
             <div class="form-group col-md-6">
-                {{form.first_name|as_crispy_field}}
+                {{form|crispy}}
             </div>
             <div class="form-group col-md-6">
-                {{form.last_name|as_crispy_field}}
+                {{form2|crispy}}
             </div>
             <div class="form-group col-md-6">
-                {{form.roll|as_crispy_field}}
+                {{form3|crispy}}
             </div>
-            <div class="form-group col-md-6">
-                {{form.registration_no|as_crispy_field}}
-            </div>
-            <div class="form-group col-md-6">
-                {{form.birthDate|as_crispy_field}}
-            </div>
-            <div class="form-group col-md-6">
-                {{form.address|as_crispy_field}}
-            </div>
-            <div class="form-group col-md-6">
-                {{form.phoneNumber|as_crispy_field}}
-            </div>
-            <div class="form-group col-md-6">
-                {{form.className|as_crispy_field}}
-            </div>
-            <div class="form-group col-md-6">
-                {{form.studentimage|as_crispy_field}}
-            </div>
+   
         </div>
 
             <!-- <div class="row form-group">

@@ -1,17 +1,30 @@
 from django.db import models
+from random import randint
 
+import datetime
+x = datetime.datetime.now()
+def random_num():
+    reg= str(x.year)+str(randint(000000,999999))
+    return reg
+
+
+
+class StudentClass(models.Model):
+    class_name=models.CharField(max_length=200)
+    
+    def __str__(self):
+        return self.class_name
 # Create your models here.
 class students(models.Model):
     registration_no=models.CharField(default=random_num(),max_length=100,unique=True,primary_key=True)
     first_name=models.CharField(max_length=100)
     last_name=models.CharField(max_length=100)
-    roll=models.IntegerField()
-    registration_no=models.CharField(default=random_num(),max_length=100)
+    roll=models.IntegerField( blank=True,null=True)
     birthDate=models.DateField()
-    details_address=models.TextField()
-    district=models.CharField(max_length=255)
-    upazilla=models.CharField(max_length=255)
-    village=models.TextField(max_length=255)
+    details_address=models.TextField( blank=True,null=True)
+    district=models.CharField(max_length=255, blank=True,null=True)
+    upazilla=models.CharField(max_length=255, blank=True,null=True)
+    village=models.TextField(max_length=255, blank=True,null=True)
     phoneNumber=models.IntegerField()
     className=models.ForeignKey(StudentClass,on_delete=models.PROTECT)
     studentimage=models.ImageField(upload_to='student_pic')
@@ -25,7 +38,7 @@ class students(models.Model):
         ('b-','B-'),
         ('ab-','AB+'),        
     )
-    blod_groop=models.CharField(choices=blod_groop_choice,max_length=5)
+    blod_groop=models.CharField(choices=blod_groop_choice,max_length=5, blank=True,null=True)
     gender_choice=(
         ('male','Male'),
         ('female','Female'),
@@ -33,7 +46,7 @@ class students(models.Model):
     )
     gender=models.CharField(choices=gender_choice,max_length=110)
     email=models.EmailField(blank=True,null=True)
-    birth_certificate_no=models.IntegerField()
+    birth_certificate_no=models.IntegerField( blank=True,null=True)
     region_choice=(
         ('Islam', 'Islam'),
         ('Hinduism', 'Hinduism'),
@@ -41,20 +54,21 @@ class students(models.Model):
         ('Christianity', 'Christianity'),
         ('Others', 'Others')
     )
-    region=models.CharField(choices=region_choice,max_length=255)
+    region=models.CharField(choices=region_choice,max_length=255, blank=True,null=True)
     nationality_choice = (
         ('Bangladeshi', 'Bangladeshi'),
         ('Others', 'Others')
     )
-    nationality=models.CharField(choices=nationality_choice,max_length=255)
+    nationality=models.CharField(choices=nationality_choice,max_length=255, blank=True,null=True)
 
     def __str__(self):
-        return self.name
+        return str(self.registration_no)
 
     
 class GuardianInfo(models.Model):
+    registration_no=models.IntegerField(primary_key=True)
     father_name=models.CharField(max_length=100)
-    father_phone_no=models.CharField(max_length=11)
+    father_phone_no=models.CharField(max_length=11, blank=True,null=True)
     father_occupation_choice=(
         ('Agriculture', 'Agriculture'),
         ('Banker', 'Banker'),
@@ -69,10 +83,10 @@ class GuardianInfo(models.Model):
         ('Worker', 'Worker'),
         ('N/A', 'N/A'),  
     )
-    father_occupation=models.CharField(choices=father_occupation_choice,max_length=45)
-    father_yearly_income=models.IntegerField()
+    father_occupation=models.CharField(choices=father_occupation_choice,max_length=45, blank=True,null=True)
+    father_yearly_income=models.IntegerField(blank=True,null=True)
     mother_name=models.CharField(max_length=100)
-    mother_phone_no=models.CharField(max_length=100)
+    mother_phone_no=models.CharField(max_length=100, blank=True,null=True)
     mother_ocupation_choice=(   
          ('Agriculture', 'Agriculture'),
         ('Banker', 'Banker'),
@@ -89,10 +103,10 @@ class GuardianInfo(models.Model):
         ('N/A', 'N/A'),
     
     )
-    mother_ocupation=models.CharField(choices=mother_ocupation_choice,max_length=45)
-    mother_yearly_income=models.IntegerField()
-    guardian_name=models.CharField(max_length=110)
-    guadian_phone_no=models.CharField(max_length=11)
+    mother_ocupation=models.CharField(choices=mother_ocupation_choice,max_length=45, blank=True,null=True)
+    mother_yearly_income=models.IntegerField( blank=True,null=True)
+    guardian_name=models.CharField(max_length=110, blank=True,null=True)
+    guadian_phone_no=models.CharField(max_length=11, blank=True,null=True)
     relationship_choice=(
                 ('Father', 'Father'),
         ('Mother', 'Mother'),
@@ -100,82 +114,55 @@ class GuardianInfo(models.Model):
         ('Uncle', 'Uncle'),
         ('Aunt', 'Aunt'),
     )
-    relationship_with_student=models.CharField(choices=relationship_choice,max_length=45)
+    relationship_with_student=models.CharField(choices=relationship_choice,max_length=45, blank=True,null=True)
     
     def __str__(self):
         return self.father_name
 
-class EmergencyContactDetails(models.Model):
-    emergency_guardian_name = models.CharField(max_length=100)
-    address = models.TextField()
-    relationship_choice = (
-        ('Father', 'Father'),
-        ('Mother', 'Mother'),
-        ('Brother', 'Brother'),
-        ('Uncle', 'Uncle'),
-        ('Aunt', 'Aunt'),
-    )
-    relationship_with_student = models.CharField(choices=relationship_choice, max_length=45)
-    phone_no = models.CharField(max_length=11)
-    email = models.EmailField(blank=True, null=True)
-
-
-    def __str__(self):
-        return self.emergency_guardian_name
 
 
 class PreviousAcademicInfo(models.Model):
-    institute_name = models.CharField(max_length=100)
-    name_of_exam = models.CharField(max_length=100)
-    group = models.CharField(max_length=45)
-    gpa = models.CharField(max_length=10)
-    board_roll = models.IntegerField()
-    passing_year = models.IntegerField()
-
-    def __str__(self):
-        return self.institute_name
-
-class PreviousAcademicCerificate(models.Model):
-    birth_certificate = models.FileField(upload_to='documents/', blank=True)
-    release_letter = models.FileField(upload_to='documents/', blank=True)
-    testimonial = models.FileField(upload_to='documents/', blank=True)
-    marksheet = models.FileField(upload_to='documents/', blank=True)
-    stipen_certificate = models.FileField(upload_to='documents/', blank=True)
-    other_certificate = models.FileField(upload_to='documents/', blank=True)
-
-
-class AcademicInfo(models.Model): 
-    class_info=models.ForeignKey(ClassInfo,on_delete=models.CASCADE)
-    registration_no=models.IntegerField(unique=True,default=random.randint(000000,999999))
-    status_select=(('not enroll','Not Enroll'),
-                    ('enrolled','Enrolled'),
-                    ('regular','Regular'),
-                    ('irregular','Irregular'),
-                    ('passed','Passed')
-                    )
-    status=models.CharField(choices=status_select,default='not enroll',max_length=15)
-    personal_info=models.ForeignKey(student_info,on_delete=models.CASCADE,null=True)
-    address_info=models.ForeignKey(StudentAddressInfo,on_delete=models.CASCADE,null=True)
-    guardian_info=models.ForeignKey(GuardianInfo,on_delete=models.CASCADE,null=True)
-    emergency_contact_info=models.ForeignKey(EmergencyContactDetails,on_delete=models.CASCADE,null=True)
-    previous_academic_info=models.ForeignKey(PreviousAcademicInfo,on_delete=models.CASCADE,null=True)
-    previous_academic_certificate=models.ForeignKey(PreviousAcademicCerificate,on_delete=models.CASCADE,null=True)
-    date=models.DateField(auto_now_add=True)
-    is_delete=models.BooleanField(default=False)
+    registration_no=models.IntegerField(primary_key=True)
+    institute_name = models.CharField(max_length=100, blank=True,null=True)
+    name_of_exam = models.CharField(max_length=100, blank=True,null=True)
+    group = models.CharField(max_length=45, blank=True,null=True)
+    gpa = models.CharField(max_length=10, blank=True,null=True)
+    board_roll = models.IntegerField(blank=True,null=True)
+    passing_year = models.IntegerField( blank=True,null=True)
 
     def __str__(self):
         return str(self.registration_no)
 
-class EnrolledStudent(models.Model):
-    class_name=models.ForeignKey(ClassInfo,on_delete=models.CASCADE)
-    Student=models.OneToOneField(AcademicInfo,on_delete=models.CASCADE)
-    roll =models.IntegerField()
-    date=models.DateField(auto_now_add=True)
 
-    class Meta:
-        unique_together=['class_name','roll']
 
-    def __str__(self):
-        return str(self.roll)
+# class AcademicInfo(models.Model): 
+#     class_info=models.ForeignKey(StudentClass,on_delete=models.CASCADE)
+#     status_select=(('not enroll','Not Enroll'),
+#                     ('enrolled','Enrolled'),
+#                     ('regular','Regular'),
+#                     ('irregular','Irregular'),
+#                     ('passed','Passed')
+#                     )
+#     status=models.CharField(choices=status_select,default='not enroll',max_length=15)
+#     emergency_contact_info=models.ForeignKey(EmergencyContactDetails,on_delete=models.CASCADE,null=True)
+#     previous_academic_info=models.ForeignKey(PreviousAcademicInfo,on_delete=models.CASCADE,null=True)
+#     previous_academic_certificate=models.ForeignKey(PreviousAcademicCerificate,on_delete=models.CASCADE,null=True)
+#     date=models.DateField(auto_now_add=True)
+#     is_delete=models.BooleanField(default=False)
+
+#     def __str__(self):
+#         return str(self.registration_no)
+
+# class EnrolledStudent(models.Model):
+#     class_name=models.ForeignKey(ClassInfo,on_delete=models.CASCADE)
+#     Student=models.OneToOneField(AcademicInfo,on_delete=models.CASCADE)
+#     roll =models.IntegerField()
+#     date=models.DateField(auto_now_add=True)
+
+#     class Meta:
+#         unique_together=['class_name','roll']
+
+#     def __str__(self):
+#         return str(self.roll)
 
     

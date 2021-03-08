@@ -1,31 +1,8 @@
 
 from django.db import models
 
-from random import randint
-
-import datetime
-x = datetime.datetime.now()
-def random_num():
-    reg='#'+ str(x.year)+str(randint(000000,999999))
-    return reg
-
-
-
-
-
-
-
-
-class StudentClass(models.Model):
-    class_name=models.CharField(max_length=200)
-    
-    def __str__(self):
-        return self.class_name
-
-
-
-
-    
+from student.models import StudentClass
+ 
 
 class teachers(models.Model):
     first_name=models.CharField(max_length=100)
